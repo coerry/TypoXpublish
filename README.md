@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
+## Deployment Site
+
+
+## Who is working on this Project?
+Andreas Moritz (S1810629007)
+
+Carina Rogl (S1810629009)
+
+## What is this project about?
+Equation Editor to convert wysiwyg equations into LaTeX usable code
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
