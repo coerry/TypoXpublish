@@ -10,6 +10,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { RegisterComponent } from './authentication/components/register/register.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './authentication/guards/auth.guard';
+import { AuthService } from './authentication/services/auth.service';
+import { HeaderComponent } from './navigation/header/header.component';
+
 var firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
   authDomain: "typox-3860f.firebaseapp.com",
@@ -24,7 +29,8 @@ var firebase = {
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -32,9 +38,12 @@ var firebase = {
 
     AngularFireModule.initializeApp(firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

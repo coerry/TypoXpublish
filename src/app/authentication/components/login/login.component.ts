@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor() { }
+  form: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
 
-  ngOnInit() {
+  constructor(public authService: AuthService, private formBuilder: FormBuilder, private router: Router) { 
+    this.initForm();
+  }
+
+  initForm() {
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required ],
+      password: ['',Validators.required]
+    })
+  }
+
+  tryLogin(value){
+    this.authService.loginWithEmail(value)
+    .then(res => {
+      this.router.navigate(['']);
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+    })
   }
 
 }
