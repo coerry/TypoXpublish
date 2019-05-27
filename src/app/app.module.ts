@@ -15,6 +15,9 @@ import { AuthGuard } from './authentication/guards/auth.guard';
 import { AuthService } from './authentication/services/auth.service';
 import { HeaderComponent } from './navigation/header/header.component';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; //always use as last plugin
+
 var firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
   authDomain: "typox-3860f.firebaseapp.com",
@@ -42,6 +45,10 @@ var firebase = {
 
     FormsModule,
     ReactiveFormsModule,
+
+    NgxsModule.forRoot([
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
