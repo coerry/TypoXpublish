@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
 
   user: firebase.User;
 
   constructor(public afAuth: AngularFireAuth, private router: Router) {
     this.afAuth.authState.subscribe(user => {
+      
       if (user) {
         this.user = user;
         localStorage.setItem('user', JSON.stringify(this.user));
@@ -20,6 +21,10 @@ export class AuthService {
         localStorage.setItem('user', null);
       }
     });
+  }
+
+  ngOnInit() {
+
   }
 
   get isLoggedIn(): boolean {
