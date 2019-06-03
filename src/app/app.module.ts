@@ -14,6 +14,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; //always 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 export const firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
@@ -38,7 +39,7 @@ export const firebase = {
     AngularFireAuthModule,
     
     NgxsModule.forRoot([
-    ]),
+    ], {developmentMode: !environment.production}),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.user']
     }),
