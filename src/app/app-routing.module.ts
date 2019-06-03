@@ -8,7 +8,8 @@ import { LoginGuard } from './authentication/guards/login.guard';
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, canActivate:[AuthGuard]},
-  {path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'}
+  {path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'},
+  {path: 'test', component: HeaderComponent},
 ];
 
 @NgModule({

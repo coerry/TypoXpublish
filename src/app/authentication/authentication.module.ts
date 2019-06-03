@@ -6,6 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { NgxsModule } from '@ngxs/store';
+import { AuthState } from './store/auth.state';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     AuthenticationRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxsModule.forFeature([AuthState]),
   ],
   providers: [
     AuthService, 

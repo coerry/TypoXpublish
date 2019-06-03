@@ -1,37 +1,39 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, OnDestroy } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { Login, Logout } from '../store/auth.actions';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit{
+export class AuthService implements OnDestroy{
 
-  user: firebase.User;
+  private authSub: Subscription;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
+  constructor(public afAuth: AngularFireAuth, private router: Router, private store: Store) {
+    this.authSub = this.afAuth.authState.subscribe(user => {
+      if (user && user.uid) {
+        this.store.dispatch(new Login(user));
       } else {
-        localStorage.setItem('user', null);
+        this.store.dispatch(new Logout());
       }
     });
   }
 
-  ngOnInit() {
-
+  ngOnDestroy() {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
   get isLoggedIn(): boolean {
-    
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    return user !== null;
+    const user = this.store.selectSnapshot((state) => state.auth.user);
+    console.log('check user: ' + JSON.stringify(user));
+    return user != null;
   }
 
   register(value) {

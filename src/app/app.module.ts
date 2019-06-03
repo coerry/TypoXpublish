@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './navigation/header/header.component';
 
 import { NgxsModule } from '@ngxs/store';
+
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; //always use as last plugin
 
 import { AngularFireModule } from '@angular/fire';
@@ -37,6 +39,9 @@ export const firebase = {
     
     NgxsModule.forRoot([
     ]),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.user']
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [],
