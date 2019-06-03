@@ -32,7 +32,6 @@ export class AuthService implements OnDestroy{
 
   get isLoggedIn(): boolean {
     const user = this.store.selectSnapshot((state) => state.auth.user);
-    console.log('check user: ' + JSON.stringify(user));
     return user != null;
   }
 
