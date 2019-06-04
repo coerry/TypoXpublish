@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './navigation/header/header.component';
 
-import { NgxsModule } from '@ngxs/store';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; //always use as last plugin
 
@@ -15,6 +16,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import {ToasterModule} from 'angular2-toaster';
 
 export const firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
@@ -34,16 +36,23 @@ export const firebase = {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    
     AngularFireModule.initializeApp(firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     
+    BrowserAnimationsModule,
+
     NgxsModule.forRoot([
     ], {developmentMode: !environment.production}),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.user']
     }),
+
+    ToasterModule.forRoot(),
+
     NgxsReduxDevtoolsPluginModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,35 +4,52 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
-import { Store } from '@ngxs/store';
+import { Store, Actions, ofActionSuccessful } from '@ngxs/store';
 import { Login, Logout } from '../store/auth.actions';
+import { ToasterService } from 'angular2-toaster';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnDestroy{
+export class AuthService implements OnDestroy {
 
   private authSub: Subscription;
+  private toasterSub: Subscription;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private store: Store) {
+  constructor(public afAuth: AngularFireAuth, private router: Router, private store: Store, private toaster: ToasterService, private actions$: Actions) {
     this.authSub = this.afAuth.authState.subscribe(user => {
       if (user && user.uid) {
         this.store.dispatch(new Login(user));
-      } else {
-        this.store.dispatch(new Logout());
       }
     });
+
+    this.toasterSub =
+      this.actions$
+        .pipe(ofActionSuccessful(Login))
+        .subscribe(() => {
+          this.toaster.pop('success', 'You are now logged in!', '');
+        });
+
+    this.toasterSub.add(this.actions$
+      .pipe(ofActionSuccessful(Logout))
+      .subscribe(() => {
+        this.toaster.pop('success', 'You are now logged out!', '');
+        this.router.navigate(['/login']);
+      }));
   }
 
   ngOnDestroy() {
     if (this.authSub) {
       this.authSub.unsubscribe();
     }
+    if (this.toasterSub) {
+      this.toasterSub.unsubscribe();
+    }
   }
 
   get isLoggedIn(): boolean {
-    const user = this.store.selectSnapshot((state) => state.auth.user);
-    return user != null;
+    const state = this.store.selectSnapshot((state) => state);
+    return state && state.auth && state.auth.user;
   }
 
   register(value) {
@@ -54,9 +71,10 @@ export class AuthService implements OnDestroy{
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
+    if (this.isLoggedIn) {
+      await this.afAuth.auth.signOut();
+      this.store.dispatch(new Logout());
+    }
   }
 }
 
