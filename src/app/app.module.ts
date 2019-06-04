@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './navigation/header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -17,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import {ToasterModule} from 'angular2-toaster';
+import { from } from 'rxjs';
 
 export const firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
@@ -36,11 +38,11 @@ export const firebase = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+
     AngularFireModule.initializeApp(firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
+
     BrowserAnimationsModule,
 
     NgxsModule.forRoot([
