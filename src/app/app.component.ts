@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToasterService } from 'angular2-toaster';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TypoX';
+
+  constructor(store:Store, toaster: ToasterService) {
+    
+  }
 }

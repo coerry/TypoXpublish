@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngxs/store';
+import { RegisterAndLogin } from '../../store/auth.actions';
+
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +17,7 @@ export class RegisterComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(public authService: AuthService, private formBuilder: FormBuilder, private router: Router) { 
+  constructor(private store: Store, private formBuilder: FormBuilder, private router: Router) { 
     this.initForm();
   }
 
@@ -26,16 +29,12 @@ export class RegisterComponent {
   }
 
   tryRegister(value){
-    this.authService.register(value)
-    .then(res => {
-      console.log(res);
-      this.errorMessage = "";
-      this.successMessage = "Your account has been created";
-      this.router.navigate(['']);
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-      this.successMessage = "";
-    });
+    this.store.dispatch(new RegisterAndLogin(value.email, value.password)).pipe(take(1)).subscribe(
+      success => {
+        this.router.navigate(['']);
+      },
+      error => {
+        this.errorMessage = error.message;
+      });
   }
 }

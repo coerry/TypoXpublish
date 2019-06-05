@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Login } from '../../store/auth.actions';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,25 +18,25 @@ export class LoginComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(public authService: AuthService, private formBuilder: FormBuilder, private router: Router, private store: Store) { 
+  constructor(public authService: AuthService, private formBuilder: FormBuilder, private router: Router, private store: Store) {
     this.initForm();
   }
 
   initForm() {
     this.form = this.formBuilder.group({
-      email: ['', Validators.required ],
-      password: ['',Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
-  tryLogin(value){
-    this.authService.loginWithEmail(value)
-    .then(res => {
-      this.router.navigate(['']);
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-    })
+  tryLogin(value) {
+    this.store.dispatch(new Login(value.email, value.password)).pipe(take(1)).subscribe(
+      success => {
+        this.router.navigate(['']);
+      },
+      error => {
+        this.errorMessage = error.message;
+      });
   }
 
 }

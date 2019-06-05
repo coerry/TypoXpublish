@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/authentication/services/auth.service';
-import { Router } from '@angular/router';
+import { Store, Select } from '@ngxs/store';
+import { AuthState } from '../authentication/store/auth.state';
+import { Observable } from 'rxjs';
+import { Logout } from '../authentication/store/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
+  @Select(AuthState.loggedIn) loggedIn$ : Observable<boolean>;
 
-  constructor(public authService: AuthService) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
   }
@@ -19,5 +22,8 @@ export class NavbarComponent implements OnInit {
     this.navbarOpen = !this.navbarOpen;
   }
 
+  logout() {
+    this.store.dispatch(new Logout());
+  }
 
 }

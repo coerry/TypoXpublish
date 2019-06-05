@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';
-import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
