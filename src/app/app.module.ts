@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './navigation/header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,7 +17,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import {ToasterModule} from 'angular2-toaster';
-import { from } from 'rxjs';
 
 export const firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
@@ -33,7 +31,7 @@ export const firebase = {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
