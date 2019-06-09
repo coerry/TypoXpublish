@@ -1,0 +1,16 @@
+$bgDefault   : #014057;
+$bgHighlight : #0b6080;
+$colDefault  : #ECEFF1;
+$colHighlight: #4e90a8;
+h1{
+  padding: 15px 0;
+}
+
+.btn-primary{
+  background-color: $bgHighlight;
+  border-color: $bgHighlight;
+}
+
+p{
+  line-height: 3em;
+}

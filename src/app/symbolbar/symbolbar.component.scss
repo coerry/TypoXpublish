@@ -1,18 +1,15 @@
-$bgDefault   : #014057;
-$bgHighlight : #0b6080;
-$colDefault  : #ECEFF1;
-$colHighlight: #4e90a8;
+$bgDefault   : #882a4e;
+$bgHighlight : #ad1550;
+$colDefault  : #F3E5F5;
+$colHighlight: #e6b2c6;
 
 .navbar-default {
   background-color: $bgDefault;
   border-color: $bgHighlight;
-  padding: 0px;
 
   .navbar-brand {
     color: $colDefault;
-    &:hover, &:focus {
-      color: $colHighlight; }
-      padding: 0 10px;
+    padding: 0 10px;
     }
   .navbar-text {
     color: $colDefault; }
@@ -53,17 +50,13 @@ $colHighlight: #4e90a8;
       }
 }
 @media (max-width: 767px) {
-  .submenu{
-    background-image: linear-gradient(#0b6080, #014057);
-    padding: 10px 25px;
-  }
   .navbar-default .navbar-nav .open .dropdown-menu {
     > li > a {
       color: $colDefault;
       &:hover, &:focus {
         color: $colHighlight; }}
     > .active {
-      > a, > a:hover, > a:focus {
+      > a, > a:hover, > a:focus, {
         color: $colHighlight;
         background-color: $bgHighlight; }}}
 }

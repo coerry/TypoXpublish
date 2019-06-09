@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import {ToasterModule} from 'angular2-toaster';
 import { HeaderComponent } from './navigation/header/header.component';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { SymbolbarComponent } from './symbolbar/symbolbar.component';
 
 export const firebase = {
   apiKey: "AIzaSyD5kytDwmZmNqQosvsDgsWs_46l4sGYY5E",
@@ -35,6 +36,7 @@ export const firebase = {
     AppComponent,
     NavbarComponent,
     HeaderComponent,
+    SymbolbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ export const firebase = {
 
     BrowserAnimationsModule,
     AuthenticationModule,
-    
+
     NgxsModule.forRoot([
     ], {developmentMode: !environment.production}),
     NgxsStoragePluginModule.forRoot({

@@ -1,5 +1,11 @@
-<h1 class="header">Login</h1>
+
 <div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1 class="header">Login</h1>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <form [formGroup]="form">
@@ -12,7 +18,7 @@
           <input type="password" class="form-control" formControlName="password">
           <label class="error">{{errorMessage}}</label>
         </div>
-        <button type="submit" (click)="tryLogin(form.value)" class="btn btn-default">Login</button>
+        <button type="submit" (click)="tryLogin(form.value)" class="btn btn-primary">Login</button>
       </form>
     </div>
   </div>
