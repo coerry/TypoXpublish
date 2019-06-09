@@ -4,11 +4,13 @@ import { LoginComponent } from './authentication/components/login/login.componen
 import { AuthGuard } from './authentication/guards/auth.guard';
 import { RegisterComponent } from './authentication/components/register/register.component';
 import { HeaderComponent } from './navigation/header/header.component';
+import { IndexComponent } from './index/index.component';
 import { LoginGuard } from './authentication/guards/login.guard';
 
 const routes: Routes = [
   {path: '', component: HeaderComponent, canActivate:[AuthGuard]},
   {path: 'test', component: HeaderComponent},
+  {path: 'main', component: IndexComponent}
 ];
 
 @NgModule({
