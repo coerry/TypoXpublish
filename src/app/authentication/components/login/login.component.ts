@@ -32,7 +32,7 @@ export class LoginComponent {
   tryLogin(value) {
     this.store.dispatch(new Login(value.email, value.password)).pipe(take(1)).subscribe(
       success => {
-        this.router.navigate(['']);
+        this.router.navigate(['main']);
       },
       error => {
         this.errorMessage = error.message;

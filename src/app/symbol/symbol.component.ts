@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SymbolComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  onClick(event: Event) {
+    console.log('clicked!', event);
+  }
+
+  addSymbole(sign:string, latexCode:any){
+
+  }
+
 
 }

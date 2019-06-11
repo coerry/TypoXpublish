@@ -1,25 +1,42 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
-import { LoginComponent } from './login.component';
+import {LoginComponent} from './login.component';
+import {Router} from '@angular/router';
+import {Store} from '@ngxs/store';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-  }));
+  let formbuilder: FormBuilder;
+  let router: Router;
+  let store: Store;
+  let service: AuthService;
+  let value: any;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = jasmine.createSpyObj('authService', ['auth']);
+    router = jasmine.createSpyObj('router', ['navigator']);
+    store = jasmine.createSpyObj('Store', ['dispatch']);
+    formbuilder = jasmine.createSpyObj('FormBuilder', ['group']);
+    formbuilder.group({
+      email: ['test@test.de'],
+      password: ['123456']
+    });
+    value = {
+      email: 'test@test.de',
+      password: '123456'
+    };
+    component = new LoginComponent(service, formbuilder, router, store);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    service = null;
+    component = null;
   });
+
+
+  it('has the login function', () => {
+    expect(component.tryLogin).toBeDefined();
+  });
+
 });

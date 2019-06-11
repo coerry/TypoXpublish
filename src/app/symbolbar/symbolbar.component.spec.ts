@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SymbolbarComponent } from './symbolbar.component';
+import { SymbolComponent } from '../symbol/symbol.component';
 
 describe('SymbolbarComponent', () => {
   let component: SymbolbarComponent;
@@ -8,7 +9,9 @@ describe('SymbolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SymbolbarComponent ]
+      declarations: [ SymbolbarComponent,
+          SymbolComponent
+        ]
     })
     .compileComponents();
   }));

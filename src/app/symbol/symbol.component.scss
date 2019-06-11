@@ -1,11 +1,11 @@
 $bgDefault   : #882a4e;
 $bgHighlight : #ad1550;
 $colDefault  : #F3E5F5;
-$colHighlight: #e6b2c6;
+$colHighlight: #ee96b8;
 
 
 
 .symbol{
-  padding: 2px;
-  border: 0.5px solid #e6b2c6;
+  padding: 5px;
+  border: 0.5px solid $colHighlight;
 }
