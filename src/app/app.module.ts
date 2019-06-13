@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { NgxsModule } from '@ngxs/store';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; //always use as last plugin
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin'; // always use as last plugin
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
